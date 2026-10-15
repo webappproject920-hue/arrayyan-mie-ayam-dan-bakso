@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kasir Mie Ayam & Bakso</title>
+<title>ArRayyan Kasir Mie Ayam & Bakso</title>
 <style>
 :root{--navy:#17324d;--blue:#245b83;--bg:#f3f6fa;--green:#168653;--red:#c0392b;--muted:#64748b;--line:#dce4ec}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#172033}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:12px 14px;font-weight:700}button:disabled{opacity:.5;cursor:not-allowed}
@@ -19,13 +19,13 @@ main{max-width:1200px;margin:auto;padding:16px}.hidden{display:none!important}.c
 <body>
 <section id="loginScreen" class="login-wrap">
   <div class="panel">
-    <h1>🍜 Mie Ayam & Bakso</h1><p class="small">Masukkan PIN untuk masuk ke aplikasi kasir.</p>
+    <h1>🍜 ArRayyan Mie Ayam & Bakso</h1><p class="small">Masukkan PIN untuk masuk ke aplikasi kasir.</p>
     <form id="loginForm"><div class="field"><label>PIN 4–8 angka</label><input id="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" required placeholder="Masukkan PIN"></div><button class="primary" type="submit">Masuk</button></form>
     <p class="small">PIN kasir dan pemilik berbeda. Jangan bagikan PIN pemilik ke kasir.</p>
   </div>
 </section>
 <div id="app" class="hidden">
-<header><div><h1 id="brand">🍜 Mie Ayam & Bakso</h1><small id="userInfo">Kasir</small></div><div class="nav"><button id="navKasir" class="active" onclick="showPage('kasir')">Kasir</button><button id="navKas" onclick="showPage('kas')">Kas Harian</button><button onclick="openReport()">Laporan</button><button onclick="logoutApp()">Keluar</button></div></header>
+<header><div><h1 id="brand">🍜 ArRayyan Mie Ayam & Bakso</h1><small id="userInfo">Kasir</small></div><div class="nav"><button id="navKasir" class="active" onclick="showPage('kasir')">Kasir</button><button id="navKas" onclick="showPage('kas')">Kas Harian</button><button onclick="openReport()">Laporan</button><button onclick="logoutApp()">Keluar</button></div></header>
 <main>
 <section id="kasirPage">
   <div id="kasAlert" class="notice">Memuat status kas...</div>
