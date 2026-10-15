@@ -69,7 +69,7 @@ let TOKEN='', ROLE='', DATA=null, MENU=[], CART={};
 const $=id=>document.getElementById(id);
 const rupiah=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
 // Paste the deployed Google Apps Script Web App URL here (ends in /exec)
-const API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+const API_URL = 'https://script.google.com/macros/s/AKfycbx3Ptvkk2Iq6M9-mOl7W_gZwVGsCkeg-QVWcvvl3BJsG4s7CVMWrLvdkxCsTS7vmBXH/exec';
 function apiCall(action,...args){
   return new Promise((resolve,reject)=>{
     if(!API_URL || API_URL.includes('PASTE_APPS_SCRIPT')) return reject(new Error('Backend belum disetel. Ikuti README.md untuk menghubungkan Google Sheets.'));
