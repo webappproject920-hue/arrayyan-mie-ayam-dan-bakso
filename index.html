@@ -14,6 +14,23 @@ main{max-width:1200px;margin:auto;padding:16px}.hidden{display:none!important}.c
 .extra-menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.extra-menu-grid .field{margin:0}.inline-actions{display:flex;gap:6px;flex-wrap:wrap}.inline-actions button{padding:7px 9px;font-size:12px}.receipt{display:none}
 @media(max-width:800px){.extra-menu-grid{grid-template-columns:1fr}}
 @media print{body *{visibility:hidden!important}.receipt,.receipt *{visibility:visible!important}.receipt{display:block!important;position:absolute;left:0;top:0;width:72mm;padding:2mm;font-family:monospace;font-size:11px;color:#000;background:#fff}.receipt h2,.receipt p{text-align:center;margin:3px 0}.receipt table{min-width:0;width:100%;font-size:11px}.receipt th,.receipt td{padding:2px 0;border-bottom:1px dashed #999;font-size:11px}.receipt .right{text-align:right}.no-print{display:none!important}}
+
+/* Warna tampilan saja: tidak mengubah transaksi atau penyimpanan data */
+.cards .card:nth-child(1){background:linear-gradient(135deg,#e7fff3,#c9f5df);border-color:#79d9ad}
+.cards .card:nth-child(1) .big{color:#14784b}
+.cards .card:nth-child(2){background:linear-gradient(135deg,#eaf5ff,#d7ebff);border-color:#8bc8ff}
+.cards .card:nth-child(2) .big{color:#1767b1}
+.cards .card:nth-child(3){background:linear-gradient(135deg,#f4edff,#e7dcff);border-color:#c1a5ff}
+.cards .card:nth-child(3) .big{color:#6337bd}
+.cards .card:nth-child(4){background:linear-gradient(135deg,#e5fbff,#cef5f7);border-color:#83dce5}
+.cards .card:nth-child(4) .big{color:#087f91}
+.menu-btn{border-radius:14px;padding:15px 13px;box-shadow:0 3px 10px #18324d08;transition:transform .12s ease,box-shadow .12s ease}
+.menu-btn.menu-food{background:linear-gradient(135deg,#fff0f1,#ffe0e4);border-color:#ff9aa4;color:#7f1d2d}
+.menu-btn.menu-food .price{color:#d52d40}
+.menu-btn.menu-drink{background:linear-gradient(135deg,#eaf7ff,#d6edff);border-color:#86c9ff;color:#123e70}
+.menu-btn.menu-drink .price{color:#0876c9}
+.menu-btn:active{box-shadow:0 1px 4px #18324d12}
+@media(max-width:800px){.menu-btn{min-height:100px;padding:14px 12px}.menu-btn strong{font-size:15px;line-height:1.25}.menu-btn .price{font-size:14px}}
 </style>
 </head>
 <body>
@@ -92,7 +109,7 @@ function showPage(page){$('kasirPage').classList.toggle('hidden',page!=='kasir')
 function openReport(){window.location.href='laporan.html'}
 async function refreshData(){try{DATA=await call('getInitialData');MENU=DATA.menu;renderDashboard();renderMenu();renderCart();renderRecent();renderCashPanel()}catch(e){toast(e.message||'Gagal memuat data')}}
 function renderDashboard(){const s=DATA.summary;$('omzet').textContent=rupiah(s.omzet);$('count').textContent=s.transactions;$('cashSales').textContent=rupiah(s.cashSales);$('expectedCash').textContent=s.expectedCash===null?'—':rupiah(s.expectedCash);const k=DATA.kas;const a=$('kasAlert');if(!k||!k.openedAt){a.textContent='Kas belum dibuka. Minta pemilik memasukkan saldo awal sebelum menerima transaksi.';a.className='notice'}else if(k.closedAt){a.textContent='Kas hari ini sudah ditutup. Transaksi baru tidak bisa dilakukan hari ini.';a.className='notice'}else{a.textContent='Kas dibuka. Pastikan uang awal dan transaksi dicatat dengan benar.';a.className='notice success'}$('saveBtn').disabled=!k||!k.openedAt||!!k.closedAt}
-function renderMenu(){$('menuGrid').innerHTML=MENU.map(m=>`<button class="menu-btn" onclick="addItem('${esc(m.id)}')"><strong>${esc(m.name)}</strong><span class="price">${rupiah(m.price)}</span></button>`).join('')||'<p>Menu belum tersedia.</p>'}
+function renderMenu(){$('menuGrid').innerHTML=MENU.map(m=>{const text=((m.category||'')+' '+(m.name||'')).toLowerCase();const drink=/minum|drink|es |es$|teh|jeruk|jus|juice|kopi|coffee|cappuccino|susu|air mineral|le mineral|aqua|lemon tea|thai tea|matcha|sirup|soda|soft drink|boba|milkshake/.test(text);return `<button class="menu-btn ${drink?'menu-drink':'menu-food'}" onclick="addItem('${esc(m.id)}')"><strong>${esc(m.name)}</strong><span class="price">${rupiah(m.price)}</span></button>`}).join('')||'<p>Menu belum tersedia.</p>'}
 function addItem(id){const m=MENU.find(x=>x.id===id);if(!m)return;CART[id]=(CART[id]||0)+1;renderCart()}
 function adjust(id,delta){CART[id]=(CART[id]||0)+delta;if(CART[id]<=0)delete CART[id];renderCart()}
 function clearCart(){CART={};$('received').value='';renderCart()}
